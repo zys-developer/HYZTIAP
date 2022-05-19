@@ -1,0 +1,6 @@
+use_frameworks!
+target 'HYZTIAP_Tests' do
+  pod 'HYZTIAP', :path => '../'
+  
+  
+end
