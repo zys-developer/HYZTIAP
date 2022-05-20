@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'HYZTIAP'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of HYZTIAP.'
+  s.summary          = '鸿运众腾内购'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,25 +18,21 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+  鸿运众腾内购封装
                        DESC
 
   s.homepage         = 'https://github.com/zys-developer/HYZTIAP'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'zys-developer' => 'zys_dev@163.com' }
   s.source           = { :git => 'https://github.com/zys-developer/HYZTIAP.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
-  s.ios.deployment_target = '9.0'
-
+  s.ios.deployment_target = '13.0'
+  s.swift_version = '5.0'
   s.source_files = 'HYZTIAP/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'HYZTIAP' => ['HYZTIAP/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'YSHUD', '~> 1.2.0'
+  s.dependency 'SwiftyFitsize', '~> 1.4.0'
+  s.dependency 'MoyaHandyJSON/RxSwift', '~> 1.1.0'
+  s.dependency 'YSExtensions', '~> 0.1.4'
+  s.dependency 'RxCocoa'
+  s.dependency 'SnapKit'
+  s.dependency 'ActiveLabel'
 end

@@ -12,14 +12,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		40DAB6827B0A5F79B8FF1A0A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		40DAB6827B0A5F79B8FF1A0A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* HYZTIAP_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HYZTIAP_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		81401587C85AFC070BD9438C /* Pods-HYZTIAP_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HYZTIAP_Tests.debug.xcconfig"; path = "Target Support Files/Pods-HYZTIAP_Tests/Pods-HYZTIAP_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9670EF1A32ADC06292A401C5 /* Pods_HYZTIAP_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HYZTIAP_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4835B570B2EC0CFB48EAC0F /* HYZTIAP.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = HYZTIAP.podspec; path = ../HYZTIAP.podspec; sourceTree = "<group>"; };
-		BCB9154F79AF63ABE9469C01 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		A4835B570B2EC0CFB48EAC0F /* HYZTIAP.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HYZTIAP.podspec; path = ../HYZTIAP.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BCB9154F79AF63ABE9469C01 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F6B012870E3839F98AA2DCE7 /* Pods-HYZTIAP_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HYZTIAP_Tests.release.xcconfig"; path = "Target Support Files/Pods-HYZTIAP_Tests/Pods-HYZTIAP_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -41,7 +41,6 @@
 				81401587C85AFC070BD9438C /* Pods-HYZTIAP_Tests.debug.xcconfig */,
 				F6B012870E3839F98AA2DCE7 /* Pods-HYZTIAP_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -131,10 +130,6 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
-					607FACCF1AFB9204008FA782 = {
-						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
-					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 0900;
@@ -147,6 +142,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);

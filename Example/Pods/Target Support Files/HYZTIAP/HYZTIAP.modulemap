@@ -1,0 +1,6 @@
+framework module HYZTIAP {
+  umbrella header "HYZTIAP-umbrella.h"
+
+  export *
+  module * { export * }
+}
