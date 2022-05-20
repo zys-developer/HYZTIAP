@@ -148,7 +148,7 @@ class HYZTIAPPurchasePage: UIView {
         stackView.snp.makeConstraints { make in
             make.top.equalTo(tipsLabel.snp.bottom).offset(config.bottomBtnTop~)
             make.centerX.equalTo(tipsLabel)
-            make.bottom.equalTo(60)
+            make.bottom.equalTo(-60)
         }
         let btnTexts = ["隐私协议", "使用条款", "恢复购买"]
         for i in 0..<3 {
