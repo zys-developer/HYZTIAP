@@ -1,11 +1,11 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/HYZTIAP"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/ActiveLabel" "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/HYZTIAP" "${PODS_CONFIGURATION_BUILD_DIR}/HandyJSON" "${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/Moya" "${PODS_CONFIGURATION_BUILD_DIR}/MoyaHandyJSON" "${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa" "${PODS_CONFIGURATION_BUILD_DIR}/RxRelay" "${PODS_CONFIGURATION_BUILD_DIR}/RxSwift" "${PODS_CONFIGURATION_BUILD_DIR}/SnapKit" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyFitsize" "${PODS_CONFIGURATION_BUILD_DIR}/YSExtensions" "${PODS_CONFIGURATION_BUILD_DIR}/YSHUD"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/HYZTIAP/HYZTIAP.framework/Headers"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/ActiveLabel/ActiveLabel.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/HYZTIAP/HYZTIAP.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/HandyJSON/HandyJSON.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD/MBProgressHUD.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Moya/Moya.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/MoyaHandyJSON/MoyaHandyJSON.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa/RxCocoa.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/RxRelay/RxRelay.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/RxSwift/RxSwift.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyFitsize/SwiftyFitsize.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/YSExtensions/YSExtensions.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/YSHUD/YSHUD.framework/Headers"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) /usr/lib/swift "$(PLATFORM_DIR)/Developer/Library/Frameworks" '@executable_path/Frameworks' '@loader_path/Frameworks'
 LIBRARY_SEARCH_PATHS = $(inherited) "${DT_TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}" /usr/lib/swift
-OTHER_LDFLAGS = $(inherited) -framework "HYZTIAP"
+OTHER_LDFLAGS = $(inherited) -framework "ActiveLabel" -framework "Alamofire" -framework "CFNetwork" -framework "CoreGraphics" -framework "Foundation" -framework "HYZTIAP" -framework "HandyJSON" -framework "MBProgressHUD" -framework "Moya" -framework "MoyaHandyJSON" -framework "QuartzCore" -framework "RxCocoa" -framework "RxRelay" -framework "RxSwift" -framework "SnapKit" -framework "SwiftyFitsize" -framework "YSExtensions" -framework "YSHUD"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

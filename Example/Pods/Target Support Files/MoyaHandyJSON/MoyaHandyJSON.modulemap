@@ -1,0 +1,6 @@
+framework module MoyaHandyJSON {
+  umbrella header "MoyaHandyJSON-umbrella.h"
+
+  export *
+  module * { export * }
+}

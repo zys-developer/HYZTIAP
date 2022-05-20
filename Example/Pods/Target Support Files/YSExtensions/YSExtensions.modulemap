@@ -1,0 +1,6 @@
+framework module YSExtensions {
+  umbrella header "YSExtensions-umbrella.h"
+
+  export *
+  module * { export * }
+}

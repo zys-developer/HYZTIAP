@@ -1,15 +1,79 @@
 PODS:
-  - HYZTIAP (0.1.0)
+  - ActiveLabel (1.1.0)
+  - Alamofire (5.6.1)
+  - HandyJSON (5.0.2)
+  - HYZTIAP (0.1.0):
+    - ActiveLabel
+    - MoyaHandyJSON/RxSwift (~> 1.1.0)
+    - RxCocoa
+    - SnapKit
+    - SwiftyFitsize (~> 1.4.0)
+    - YSExtensions (~> 0.1.4)
+    - YSHUD (~> 1.2.0)
+  - MBProgressHUD (1.2.0)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - Moya/RxSwift (15.0.0):
+    - Moya/Core
+    - RxSwift (~> 6.0)
+  - MoyaHandyJSON/Core (1.1.0):
+    - HandyJSON
+    - Moya (~> 15.0)
+  - MoyaHandyJSON/RxSwift (1.1.0):
+    - Moya/RxSwift (~> 15.0)
+    - MoyaHandyJSON/Core
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - SnapKit (5.6.0)
+  - SwiftyFitsize (1.4.0)
+  - YSExtensions (0.1.4)
+  - YSHUD (1.2.0):
+    - MBProgressHUD (~> 1.2.0)
 
 DEPENDENCIES:
   - HYZTIAP (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - ActiveLabel
+    - Alamofire
+    - HandyJSON
+    - MBProgressHUD
+    - Moya
+    - MoyaHandyJSON
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+    - SnapKit
+    - SwiftyFitsize
+    - YSExtensions
+    - YSHUD
 
 EXTERNAL SOURCES:
   HYZTIAP:
     :path: "../"
 
 SPEC CHECKSUMS:
-  HYZTIAP: 6154eb61ba69c915d9fca42d9f503593e58c7b5f
+  ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
+  Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
+  HYZTIAP: 6203d94c3d98f89e0d0d364e3a84005ebd346daf
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  MoyaHandyJSON: 5d042452ec3b1d3820b90ddb67911beb8bcef6e3
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SwiftyFitsize: 7b12144a362b0c233d8fb8817e54988a60d92b02
+  YSExtensions: d8be62e62b428805c556c82e9624ba82c2103098
+  YSHUD: a82c28b71e3e528bf4591fe455f8b56da8fc0864
 
 PODFILE CHECKSUM: 00cef63c587f9598df8a13aff8a906b5ee333edc
 
