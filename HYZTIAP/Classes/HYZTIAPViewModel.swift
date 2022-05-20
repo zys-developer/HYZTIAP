@@ -120,7 +120,7 @@ public class HYZTIAPViewModel: NSObject {
                 do {
                     let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
                     let receiptString = receiptData.base64EncodedString(options: [])
-                    let param = ["receipt-data": receiptString, "password": ""]
+                    let param = ["receipt-data": receiptString, "password": HYZTIAPConfig.shared.delegate?.password ?? ""]
                     verifyReceipt(url: "https://buy.itunes.apple.com/verifyReceipt", param: param, isRestored: transaction.transactionState == .restored)
                 } catch {
                     HYZTIAPViewModel.failure.onNext(transaction.transactionState == .restored ? "恢复失败" : "订阅失败")

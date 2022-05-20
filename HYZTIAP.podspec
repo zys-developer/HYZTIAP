@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HYZTIAP'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = '鸿运众腾内购'
 
 # This description is used to generate tags and improve search results.
@@ -28,9 +28,9 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '13.0'
   s.swift_version = '5.0'
   s.source_files = 'HYZTIAP/Classes/**/*'
-  s.dependency 'YSHUD', '~> 1.2.0'
+  s.dependency 'YSHUD'
   s.dependency 'SwiftyFitsize', '~> 1.4.0'
-  s.dependency 'MoyaHandyJSON/RxSwift', '~> 1.1.0'
+  s.dependency 'MoyaHandyJSON/RxSwift'
   s.dependency 'YSExtensions', '~> 0.1.4'
   s.dependency 'RxCocoa'
   s.dependency 'SnapKit'
