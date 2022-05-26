@@ -3,12 +3,18 @@
 import UIKit
 
 public struct HYZTIAPConfig {
+    
+    public enum PurchaseViewType {
+    case `default`, banner
+    }
+    
     private init() {}
     public static var shared = HYZTIAPConfig()
     public var delegate: HYZTIAPConfigDelegate?
 }
 
 public protocol HYZTIAPConfigDelegate {
+    
     // MARK: 视图控制器的配置
     /// 背景色
     var vcBgColor: UIColor { get }
@@ -20,8 +26,6 @@ public protocol HYZTIAPConfigDelegate {
     // MARK: 分页的配置
     /// 图片名前缀
     var imagePrefix: String { get }
-    /// 图片位置
-    var imageFrames: [CGRect] { get }
     /// 文字top
     var textTop: CGFloat { get }
     /// 文字间距
@@ -52,8 +56,12 @@ public protocol HYZTIAPConfigDelegate {
     var btnBackgroundColor: UIColor? { get }
     
     // MARK: 引导页的配置
+    /// 图片位置
+    var imageFrames: [CGRect] { get }
     /// 文字
     var texts: [(bigText: String, smallText: String)] { get }
+    /// 自定义引导页
+    var customGuides: [(UIView) -> Void]? { get }
     
     // MARK: 内购页的配置
     var closeBtnTop: CGFloat { get }
@@ -78,6 +86,36 @@ public protocol HYZTIAPConfigDelegate {
     var bottomBtnTop: CGFloat { get }
     /// 底部按钮间距
     var bottomBtnSpacing: CGFloat { get }
+    /// 自定义内购页
+    var customPurchase: ((UIView) -> Void)? { get }
+    /// 内购页类型
+    var type: HYZTIAPConfig.PurchaseViewType { get }
+    /// banner top
+    var bannerTop: CGFloat? { get }
+    /// banner width
+    var bannerWidth: CGFloat? { get }
+    /// banner height
+    var bannerHeight: CGFloat? { get }
+    /// banner标题数组
+    var bannerTitles: [String]? { get }
+    /// banner标题字体
+    var bannerTitleFont: UIFont? { get }
+    /// banner标题颜色
+    var bannerTitleColor: UIColor? { get }
+    /// banner标题top
+    var bannerTitleTop: CGFloat? { get }
+    /// banner内容数组
+    var bannerContents: [String]? { get }
+    /// banner内容字体
+    var bannerContentFont: UIFont? { get }
+    /// banner内容颜色
+    var bannerContentColor: UIColor? { get }
+    /// banner内容top
+    var bannerContentTop: CGFloat? { get }
+    /// banner图片名数组
+    var bannerImageNames: [String]? { get }
+    /// banner图片top
+    var bannerImageTop: CGFloat? { get }
     
     // MARK: 启动页的配置
     /// logo图片名
@@ -146,9 +184,43 @@ public extension HYZTIAPConfigDelegate {
     /// 按钮图片名
     var btnImageName: String? { nil }
     
+    // MARK: 引导页的配置
+    /// 自定义引导页
+    var customGuides: [(UIView) -> Void]? { nil }
+    
     // MARK: 内购页的配置
     /// 按钮间距
     var btnSpacing: CGFloat { 12 }
+    /// 自定义内购页
+    var customPurchase: ((UIScrollView) -> Void)? { nil }
+    /// 内购页类型
+    var type: HYZTIAPConfig.PurchaseViewType { .default }
+    /// banner top
+    var bannerTop: CGFloat? { nil }
+    /// banner width
+    var bannerWidth: CGFloat? { nil }
+    /// banner height
+    var bannerHeight: CGFloat? { nil }
+    /// banner标题数组
+    var bannerTitles: [String]? { nil }
+    /// banner标题字体
+    var bannerTitleFont: UIFont? { nil }
+    /// banner标题颜色
+    var bannerTitleColor: UIColor? { nil }
+    /// banner标题top
+    var bannerTitleTop: CGFloat? { nil }
+    /// banner内容数组
+    var bannerContents: [String]? { nil }
+    /// banner内容字体
+    var bannerContentFont: UIFont? { nil }
+    /// banner内容颜色
+    var bannerContentColor: UIColor? { nil }
+    /// banner内容top
+    var bannerContentTop: CGFloat? { nil }
+    /// banner图片名数组
+    var bannerImageNames: [String]? { nil }
+    /// banner图片top
+    var bannerImageTop: CGFloat? { nil }
     
     // MARK: 启动页的配置
     /// logo图片名

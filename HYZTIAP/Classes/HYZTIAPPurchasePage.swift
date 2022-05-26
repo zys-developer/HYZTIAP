@@ -13,6 +13,8 @@ class HYZTIAPPurchasePage: UIView {
     let disposeBag = DisposeBag()
     // 是否引导页
     let isGuide: Bool
+    // 类型
+    let type: HYZTIAPConfig.PurchaseViewType
     // 数据模型
     let model: BehaviorRelay<HYZTIAPModel?>
     // 购买按钮
@@ -23,6 +25,7 @@ class HYZTIAPPurchasePage: UIView {
     init(isGuide: Bool, pushXieYi: @escaping (Int) -> Void) {
         self.isGuide = isGuide
         self.model = isGuide ? HYZTIAPViewModel.guideModel : HYZTIAPViewModel.mineModel
+        self.type = config.type
         super.init(frame: .zero)
         
         backgroundColor = .clear
@@ -170,6 +173,76 @@ class HYZTIAPPurchasePage: UIView {
                 })
                 .disposed(by: disposeBag)
         }
+        
+        config.customPurchase?(scrollView)
+        
+        guard type == .banner,
+              let top = config.bannerTop,
+              let width = config.bannerWidth,
+              let height = config.bannerHeight,
+              let titles = config.bannerTitles,
+              let titleFont = config.bannerTitleFont,
+              let titleColor = config.bannerTitleColor,
+              let titleTop = config.bannerTitleTop,
+              let contents = config.bannerContents,
+              let contentFont = config.bannerContentFont,
+              let contentColor = config.bannerContentColor,
+              let contentTop = config.bannerContentTop,
+              let imageNames = config.bannerImageNames,
+              let imageTop = config.bannerImageTop,
+              titles.count == contents.count,
+              contents.count == imageNames.count else { return }
+        let banner = UIScrollView()
+        banner.isUserInteractionEnabled = false
+        banner.showsHorizontalScrollIndicator = false
+        scrollView.addSubview(banner)
+        banner.snp.makeConstraints { make in
+            make.top.equalTo(top~)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(width~)
+            make.height.equalTo(height~)
+        }
+        let total = titles.count
+        for i in 0...total {
+            let view = UIView()
+            banner.addSubview(view)
+            let titleLabel = UILabel(text: titles[i % total], font: titleFont~, textColor: titleColor, textAlignment: .center)
+            view.addSubview(titleLabel)
+            let contentLabel = UILabel(text: contents[i % total], font: contentFont~, textColor: contentColor, textAlignment: .center)
+            view.addSubview(contentLabel)
+            let imageView = UIImageView(imageNames[i % total])
+            view.addSubview(imageView)
+            view.snp.makeConstraints { make in
+                make.top.bottom.width.height.equalToSuperview()
+                make.leading.equalTo(width * i~)
+                if i == titles.count {
+                    make.trailing.equalToSuperview()
+                }
+            }
+            titleLabel.snp.makeConstraints { make in
+                make.top.equalTo(titleTop)
+                make.centerX.equalToSuperview()
+            }
+            contentLabel.snp.makeConstraints { make in
+                make.top.equalTo(contentTop)
+                make.centerX.equalToSuperview()
+            }
+            imageView.snp.makeConstraints { make in
+                make.top.equalTo(imageTop)
+                make.centerX.equalToSuperview()
+                make.width.equalTo((imageView.image?.size.width ?? 0)~)
+                make.height.equalTo((imageView.image?.size.height ?? 0)~)
+            }
+        }
+        Observable<Int>.interval(.seconds(5), scheduler: MainScheduler.asyncInstance)
+            .subscribe(onNext: { i in
+                let i = i % titles.count + 1
+                if i == 1 {
+                    banner.setContentOffset(.zero, animated: false)
+                }
+                banner.setContentOffset(CGPoint(x: width * i~, y: 0), animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {

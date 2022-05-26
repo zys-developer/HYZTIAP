@@ -2,14 +2,14 @@ PODS:
   - ActiveLabel (1.1.0)
   - Alamofire (5.6.1)
   - HandyJSON (5.0.2)
-  - HYZTIAP (0.1.0):
+  - HYZTIAP (0.1.2):
     - ActiveLabel
-    - MoyaHandyJSON/RxSwift (~> 1.1.0)
+    - MoyaHandyJSON/RxSwift
     - RxCocoa
     - SnapKit
     - SwiftyFitsize (~> 1.4.0)
     - YSExtensions (~> 0.1.4)
-    - YSHUD (~> 1.2.0)
+    - YSHUD
   - MBProgressHUD (1.2.0)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
@@ -63,7 +63,7 @@ SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
-  HYZTIAP: 6203d94c3d98f89e0d0d364e3a84005ebd346daf
+  HYZTIAP: 4c5dc05b3f1ad315fb4c2f828ba3fba812111660
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   MoyaHandyJSON: 5d042452ec3b1d3820b90ddb67911beb8bcef6e3
