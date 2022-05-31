@@ -25,7 +25,7 @@ class HYZTIAPPurchasePage: UIView {
     init(isGuide: Bool, pushXieYi: @escaping (Int) -> Void) {
         self.isGuide = isGuide
         self.model = isGuide ? HYZTIAPViewModel.guideModel : HYZTIAPViewModel.mineModel
-        self.type = config.type
+        self.type = config.purchaseViewType
         super.init(frame: .zero)
         
         backgroundColor = .clear
@@ -114,7 +114,11 @@ class HYZTIAPPurchasePage: UIView {
                 }
                 for product in model.productList ?? [] {
                     let btn = UIButton(title: product.text, textColor: self.config.btnTextColor, font: self.config.btnFont~, backgroundColor: self.config.btnBackgroundColor)
+                    if let btnImageName = self.config.btnImageName {
+                        btn.setBackgroundImage(UIImage(named: btnImageName), for: .normal)
+                    }
                     btn.layer.cornerRadius = self.config.btnCornerRadius~
+                    btn.layer.masksToBounds = true
                     self.productView.addArrangedSubview(btn)
                     btn.snp.makeConstraints { make in
                         make.width.equalTo(self.config.btnWidth~)

@@ -88,9 +88,13 @@ class HYZTIAPGuideViewController: UIViewController {
     
     func nextBtn() {
         let nextBtn = UIButton(title: "继续", textColor: config.btnTextColor, font: config.btnFont~, backgroundColor: config.btnBackgroundColor)
+        if let btnImageName = config.btnImageName {
+            nextBtn.setBackgroundImage(UIImage(named: btnImageName), for: .normal)
+        }
         view.addSubview(nextBtn)
         nextBtn.frame = CGRect(x: (375 - config.btnWidth) / 2, y: config.btnTop, width: config.btnWidth, height: config.btnHeight)~
         nextBtn.layer.cornerRadius = config.btnCornerRadius~
+        nextBtn.layer.masksToBounds = true
         // 点击继续
         nextBtn.rx.tap
             .subscribe(onNext: { [unowned self] in

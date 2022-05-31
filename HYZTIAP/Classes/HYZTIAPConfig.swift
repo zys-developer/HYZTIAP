@@ -7,6 +7,9 @@ public struct HYZTIAPConfig {
     public enum PurchaseViewType {
     case `default`, banner
     }
+    public enum PurchaseType {
+    case launch, mine
+    }
     
     private init() {}
     public static var shared = HYZTIAPConfig()
@@ -64,7 +67,11 @@ public protocol HYZTIAPConfigDelegate {
     var customGuides: [(UIView) -> Void]? { get }
     
     // MARK: 内购页的配置
+    /// 触点内购接口类型
+    var purchaseType: HYZTIAPConfig.PurchaseType { get }
+    /// 关闭按钮top
     var closeBtnTop: CGFloat { get }
+    /// 关闭按钮leading
     var closeBtnLeading: CGFloat { get }
     /// 文字
     var text: String { get }
@@ -87,9 +94,9 @@ public protocol HYZTIAPConfigDelegate {
     /// 底部按钮间距
     var bottomBtnSpacing: CGFloat { get }
     /// 自定义内购页
-    var customPurchase: ((UIView) -> Void)? { get }
+    var customPurchase: ((UIScrollView) -> Void)? { get }
     /// 内购页类型
-    var type: HYZTIAPConfig.PurchaseViewType { get }
+    var purchaseViewType: HYZTIAPConfig.PurchaseViewType { get }
     /// banner top
     var bannerTop: CGFloat? { get }
     /// banner width
@@ -189,12 +196,14 @@ public extension HYZTIAPConfigDelegate {
     var customGuides: [(UIView) -> Void]? { nil }
     
     // MARK: 内购页的配置
+    /// 触点内购接口类型
+    var purchaseType: HYZTIAPConfig.PurchaseType { .mine }
     /// 按钮间距
     var btnSpacing: CGFloat { 12 }
     /// 自定义内购页
     var customPurchase: ((UIScrollView) -> Void)? { nil }
     /// 内购页类型
-    var type: HYZTIAPConfig.PurchaseViewType { .default }
+    var purchaseViewType: HYZTIAPConfig.PurchaseViewType { .default }
     /// banner top
     var bannerTop: CGFloat? { nil }
     /// banner width

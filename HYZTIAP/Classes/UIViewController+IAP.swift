@@ -5,10 +5,13 @@ extension UIViewController {
     
     /// 弹出内购
     /// - Parameter actionHandler: 订阅后执行的闭包
-    @objc public func isVip(actionHandler: @escaping () -> Void) {
+    /// - Returns: 是否已订阅
+    @discardableResult
+    @objc public func isVip(actionHandler: @escaping () -> Void) -> Bool {
         if HYZTIAPViewModel.isVip {
             // 已订阅, 执行回调闭包
             actionHandler()
+            return true
         } else {
             // 未订阅, 弹出内购页
             let ivc = HYZTIAPGuideViewController { [unowned self] in
@@ -20,6 +23,7 @@ extension UIViewController {
             let nvc = UINavigationController(rootViewController: ivc)
             nvc.modalPresentationStyle = .fullScreen
             present(nvc, animated: true)
+            return false
         }
     }
     
