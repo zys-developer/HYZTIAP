@@ -15,6 +15,8 @@ class HYZTIAPPurchasePage: UIView {
     let isGuide: Bool
     // 类型
     let type: HYZTIAPConfig.PurchaseViewType
+    // banner滚动
+    var bannerScroll = true
     // 数据模型
     let model: BehaviorRelay<HYZTIAPModel?>
     // 购买按钮
@@ -126,7 +128,8 @@ class HYZTIAPPurchasePage: UIView {
                     }
                     // MARK: 点击按钮, 开始订阅
                     btn.rx.tap
-                        .subscribe(onNext: {
+                        .subscribe(onNext: { [unowned self] in
+                            self.bannerScroll = false
                             HUD.showLoading("加载中...") { hud in
                                 hud.backgroundView.style = .blur
                                 hud.backgroundView.blurEffectStyle = .regular
@@ -162,10 +165,11 @@ class HYZTIAPPurchasePage: UIView {
             let btn = UIButton(title: btnTexts[i], textColor: config.bottomBtnTextColor, font: config.bottomBtnFont~, backgroundColor: nil)
             stackView.addArrangedSubview(btn)
             btn.rx.tap
-                .subscribe(onNext: {
+                .subscribe(onNext: { [unowned self] in
                     if i < 2 {
                         pushXieYi(i)
                     } else {
+                        bannerScroll = false
                         HUD.showLoading("恢复中...") { hud in
                             hud.backgroundView.style = .blur
                             hud.backgroundView.blurEffectStyle = .regular
@@ -238,13 +242,30 @@ class HYZTIAPPurchasePage: UIView {
                 make.height.equalTo((imageView.image?.size.height ?? 0)~)
             }
         }
-        Observable<Int>.interval(.seconds(5), scheduler: MainScheduler.asyncInstance)
+        let index = BehaviorRelay(value: 0)
+        index
             .subscribe(onNext: { i in
-                let i = i % titles.count + 1
                 if i == 1 {
                     banner.setContentOffset(.zero, animated: false)
                 }
                 banner.setContentOffset(CGPoint(x: width * i~, y: 0), animated: true)
+            })
+            .disposed(by: disposeBag)
+        Observable<Int>.interval(.seconds(5), scheduler: MainScheduler.asyncInstance)
+            .filter { [unowned self] _ in bannerScroll }
+            .withLatestFrom(index)
+            .map { $0 % titles.count + 1 }
+            .bind(to: index)
+            .disposed(by: disposeBag)
+        HYZTIAPViewModel.success
+            .subscribe(onNext: { [weak self] _ in
+                self?.bannerScroll = true
+            })
+            .disposed(by: disposeBag)
+        
+        HYZTIAPViewModel.failure
+            .subscribe(onNext: { [weak self] _ in
+                self?.bannerScroll = true
             })
             .disposed(by: disposeBag)
     }
