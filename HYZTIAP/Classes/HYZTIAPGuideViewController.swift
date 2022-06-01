@@ -17,6 +17,10 @@ class HYZTIAPGuideViewController: UIViewController {
     let config = HYZTIAPConfig.shared.delegate!
     
     let disposeBag = DisposeBag()
+    
+    deinit {
+        print("HYZTIAPGuideViewController deinit")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,7 +119,7 @@ class HYZTIAPGuideViewController: UIViewController {
         HYZTIAPViewModel.success
             .subscribe(onNext: { [weak self] msg in
                 if let msg = msg {
-                    HUD.showSucceed(msg, on: self?.view, completed:  {
+                    HUD.showSucceed(msg, completed:  {
                         self?.finished()
                     })
                 } else {
