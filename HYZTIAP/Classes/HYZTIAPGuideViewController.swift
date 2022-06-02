@@ -104,6 +104,7 @@ class HYZTIAPGuideViewController: UIViewController {
             .subscribe(onNext: { [unowned self] in
                 // 滚动到下一页
                 let currentIndex = Int((self.scrollView.contentOffset.x + 0.01) / 375~)
+                guard currentIndex < 3 else { return }
                 scrollView.setContentOffset(CGPoint(x: ((currentIndex + 1) * 375)~, y: 0), animated: true)
             })
             .disposed(by: disposeBag)
