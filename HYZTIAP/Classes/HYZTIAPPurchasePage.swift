@@ -242,6 +242,23 @@ class HYZTIAPPurchasePage: UIView {
                 make.height.equalTo((imageView.image?.size.height ?? 0)~)
             }
         }
+        let pageControl: UIPageControl?
+        if let top = config.bannerPageControlTop,
+           let currentColor = config.bannerPageControlCurrentColor,
+           let color = config.bannerPageControlColor {
+            let pc = UIPageControl()
+            pageControl = pc
+            pc.numberOfPages = total
+            pc.pageIndicatorTintColor = color
+            pc.currentPageIndicatorTintColor = currentColor
+            scrollView.addSubview(pc)
+            pc.snp.makeConstraints { make in
+                make.top.equalTo(top~)
+                make.centerX.equalTo(banner)
+            }
+        } else {
+            pageControl = nil
+        }
         let index = BehaviorRelay(value: 0)
         index
             .subscribe(onNext: { i in
@@ -249,6 +266,7 @@ class HYZTIAPPurchasePage: UIView {
                     banner.setContentOffset(.zero, animated: false)
                 }
                 banner.setContentOffset(CGPoint(x: width * i~, y: 0), animated: true)
+                pageControl?.currentPage = i % 4
             })
             .disposed(by: disposeBag)
         Observable<Int>.interval(.seconds(5), scheduler: MainScheduler.asyncInstance)

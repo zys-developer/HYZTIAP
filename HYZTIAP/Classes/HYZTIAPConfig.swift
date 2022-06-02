@@ -123,6 +123,12 @@ public protocol HYZTIAPConfigDelegate {
     var bannerImageNames: [String]? { get }
     /// banner图片top
     var bannerImageTop: CGFloat? { get }
+    /// banner圆点top
+    var bannerPageControlTop: CGFloat? { get }
+    /// banner当前圆点颜色
+    var bannerPageControlCurrentColor: UIColor? { get }
+    /// banner其他圆点颜色
+    var bannerPageControlColor: UIColor? { get }
     
     // MARK: 启动页的配置
     /// logo图片名
@@ -230,6 +236,12 @@ public extension HYZTIAPConfigDelegate {
     var bannerImageNames: [String]? { nil }
     /// banner图片top
     var bannerImageTop: CGFloat? { nil }
+    /// banner圆点top
+    var bannerPageControlTop: CGFloat? { nil }
+    /// banner当前圆点颜色
+    var bannerPageControlCurrentColor: UIColor? { nil }
+    /// banner其他圆点颜色
+    var bannerPageControlColor: UIColor? { nil }
     
     // MARK: 启动页的配置
     /// logo图片名
