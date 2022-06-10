@@ -128,7 +128,7 @@ public class HYZTIAPLaunchViewController: UIViewController {
                 window.rootViewController = rootViewController
             } else {
                 // 引导页
-                let ivc = HYZTIAPGuideViewController(isGuide: true) {
+                let ivc = HYZTIAPGuideViewController(purchaseType: .guide) {
                     window.rootViewController = rootViewController
                     UserDefaults.standard.set(true, forKey: didLaunchGuideKey)
                 }

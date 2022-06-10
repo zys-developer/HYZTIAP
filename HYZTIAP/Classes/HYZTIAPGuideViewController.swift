@@ -7,8 +7,8 @@ import SwiftyFitsize
 
 class HYZTIAPGuideViewController: UIViewController {
     
-    // 是否引导页
-    let isGuide: Bool
+    // 内购页类型
+    let purchaseType: HYZTIAPPurchasePage.PurchaseType
     // 控制器出栈后的操作
     let finished: () -> Void
     // 滚动视图
@@ -29,7 +29,7 @@ class HYZTIAPGuideViewController: UIViewController {
         // 分页
         pages()
         // 继续按钮
-        if isGuide {
+        if purchaseType == .guide {
             nextBtn()
         }
         // 订阅
@@ -59,15 +59,15 @@ class HYZTIAPGuideViewController: UIViewController {
         // 不回弹
         scrollView.bounces = false
         // 容器大小
-        scrollView.contentSize = CGSize(width: view.bounds.width * (isGuide ? 4 : 1), height: view.bounds.height)
+        scrollView.contentSize = CGSize(width: view.bounds.width * (purchaseType == .guide ? 4 : 1), height: view.bounds.height)
         view.addSubview(scrollView)
         
         // 内购页
-        let iapPage = HYZTIAPPurchasePage(isGuide: isGuide) { [weak self] index in
+        let iapPage = HYZTIAPPurchasePage(purchaseType: purchaseType) { [weak self] index in
             self?.pushXieYi(index: index)
         }
         scrollView.addSubview(iapPage)
-        iapPage.frame = CGRect(x: view.bounds.width * (isGuide ? 3 : 0), y: 0, width: view.bounds.width, height: view.bounds.height)
+        iapPage.frame = CGRect(x: view.bounds.width * (purchaseType == .guide ? 3 : 0), y: 0, width: view.bounds.width, height: view.bounds.height)
         iapPage.closeBtn.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.finished()
@@ -75,7 +75,7 @@ class HYZTIAPGuideViewController: UIViewController {
             .disposed(by: disposeBag)
         
         // 引导页
-        if isGuide {
+        if purchaseType == .guide {
             for (i, texts) in config.texts.enumerated() {
                 let page = HYZTIAPGuidePage(imageName: "\(config.imagePrefix)\(i)", imageFrame: config.imageFrames[i], bigText: texts.bigText, smallText: texts.smallText)
                 scrollView.addSubview(page)
@@ -145,8 +145,8 @@ class HYZTIAPGuideViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    init(isGuide: Bool = false, finished: @escaping () -> Void) {
-        self.isGuide = isGuide
+    init(purchaseType: HYZTIAPPurchasePage.PurchaseType, finished: @escaping () -> Void) {
+        self.purchaseType = purchaseType
         self.finished = finished
         super.init(nibName: nil, bundle: nil)
     }

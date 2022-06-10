@@ -1,7 +1,21 @@
 
 import UIKit
+import YSHUD
 
 extension UIViewController {
+    
+    @objc public func mineVip() {
+        if HYZTIAPViewModel.isVip {
+            HUD.showMessage(HYZTIAPConfig.shared.delegate?.purchasedText ?? "您已订阅高级权限")
+        } else {
+            let ivc = HYZTIAPGuideViewController(purchaseType: .mine) { [unowned self] in
+                dismiss(animated: true) 
+            }
+            let nvc = UINavigationController(rootViewController: ivc)
+            nvc.modalPresentationStyle = .fullScreen
+            present(nvc, animated: true)
+        }
+    }
     
     /// 弹出内购
     /// - Parameter actionHandler: 订阅后执行的闭包
@@ -14,7 +28,7 @@ extension UIViewController {
             return true
         } else {
             // 未订阅, 弹出内购页
-            let ivc = HYZTIAPGuideViewController { [unowned self] in
+            let ivc = HYZTIAPGuideViewController(purchaseType: .present) { [unowned self] in
                 dismiss(animated: true) {
                     guard HYZTIAPViewModel.isVip else { return }
                     actionHandler()

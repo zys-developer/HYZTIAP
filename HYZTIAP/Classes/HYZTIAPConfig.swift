@@ -8,7 +8,7 @@ public struct HYZTIAPConfig {
     case `default`, banner
     }
     public enum PurchaseType {
-    case launch, mine
+    case guide, mine
     }
     
     private init() {}
@@ -178,6 +178,9 @@ public protocol HYZTIAPConfigDelegate {
     
     // MARK: 内购秘钥
     var password: String { get }
+    
+    // MARK: 已订阅提示文案
+    var purchasedText: String { get }
 }
 
 public extension HYZTIAPConfigDelegate {
@@ -276,4 +279,7 @@ public extension HYZTIAPConfigDelegate {
     var productIdMapper: String? { nil }
     /// 按钮文字
     var textMapper: String? { nil }
+    
+    // MARK: 已订阅提示文案
+    var purchasedText: String { "您已订阅高级权限" }
 }

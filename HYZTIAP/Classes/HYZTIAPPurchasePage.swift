@@ -8,13 +8,15 @@ import SnapKit
 
 class HYZTIAPPurchasePage: UIView {
     
+    enum PurchaseType {
+    case guide, mine, present
+    }
+    
     let config = HYZTIAPConfig.shared.delegate!
     
     let disposeBag = DisposeBag()
-    // 是否引导页
-    let isGuide: Bool
     // 类型
-    let type: HYZTIAPConfig.PurchaseViewType
+    let purchaseViewType: HYZTIAPConfig.PurchaseViewType
     // banner滚动
     var bannerScroll = true
     // 数据模型
@@ -24,10 +26,14 @@ class HYZTIAPPurchasePage: UIView {
     // 关闭按钮
     let closeBtn = UIButton("\(HYZTIAPConfig.shared.delegate?.imagePrefix ?? "g_")close")
     
-    init(isGuide: Bool, pushXieYi: @escaping (Int) -> Void) {
-        self.isGuide = isGuide
-        self.model = (!isGuide && HYZTIAPConfig.shared.delegate!.purchaseType == .mine) ? HYZTIAPViewModel.mineModel : HYZTIAPViewModel.guideModel
-        self.type = HYZTIAPConfig.shared.delegate!.purchaseViewType
+    init(purchaseType: HYZTIAPPurchasePage.PurchaseType, pushXieYi: @escaping (Int) -> Void) {
+        switch purchaseType {
+        case .guide, .present where HYZTIAPConfig.shared.delegate?.purchaseType == .guide:
+            self.model = HYZTIAPViewModel.guideModel
+        default:
+            self.model = HYZTIAPViewModel.mineModel
+        }
+        self.purchaseViewType = HYZTIAPConfig.shared.delegate!.purchaseViewType
         super.init(frame: .zero)
         
         backgroundColor = .clear
@@ -184,7 +190,7 @@ class HYZTIAPPurchasePage: UIView {
         
         config.customPurchase?(scrollView)
         
-        guard type == .banner,
+        guard purchaseViewType == .banner,
               let top = config.bannerTop,
               let width = config.bannerWidth,
               let height = config.bannerHeight,
