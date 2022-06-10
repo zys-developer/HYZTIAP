@@ -20,7 +20,7 @@ class HYZTIAPGuidePage: UIView {
         let bigLabel = UILabel(text: bigText, font: config.bigTextFont~, textColor: config.bigTextColor, textAlignment: .center, backgroundColor: nil)
         addSubview(bigLabel)
         bigLabel.snp.makeConstraints { make in
-            make.top.equalTo(config.textTop~)
+            make.top.equalTo(config.textTop~ + (UIScreen.main.bounds.height - 667~) * 0.5)
             make.centerX.equalToSuperview()
         }
         

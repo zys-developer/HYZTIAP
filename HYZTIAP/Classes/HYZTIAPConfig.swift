@@ -244,8 +244,6 @@ public extension HYZTIAPConfigDelegate {
     var bannerPageControlColor: UIColor? { nil }
     
     // MARK: 启动页的配置
-    /// logo图片名
-    var logo: String { "aboutUs" }
     /// logo宽
     var logoWidth: CGFloat { 80 }
     /// logo搞

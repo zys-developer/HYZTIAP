@@ -96,7 +96,7 @@ class HYZTIAPGuideViewController: UIViewController {
             nextBtn.setBackgroundImage(UIImage(named: btnImageName), for: .normal)
         }
         view.addSubview(nextBtn)
-        nextBtn.frame = CGRect(x: (375 - config.btnWidth) / 2, y: config.btnTop, width: config.btnWidth, height: config.btnHeight)~
+        nextBtn.frame = CGRect(x: (375 - config.btnWidth)~ / 2, y: config.btnTop~ + (UIScreen.main.bounds.height - 667~) * 0.5, width: config.btnWidth~, height: config.btnHeight~)
         nextBtn.layer.cornerRadius = config.btnCornerRadius~
         nextBtn.layer.masksToBounds = true
         // 点击继续

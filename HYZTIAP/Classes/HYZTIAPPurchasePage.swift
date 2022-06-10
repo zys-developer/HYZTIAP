@@ -55,7 +55,7 @@ class HYZTIAPPurchasePage: UIView {
         let bigLabel = UILabel(text: config.text, font: config.bigTextFont~, textColor: config.bigTextColor, textAlignment: .center, backgroundColor: nil)
         scrollView.addSubview(bigLabel)
         bigLabel.snp.makeConstraints { make in
-            make.top.equalTo(config.textTop~)
+            make.top.equalTo(config.textTop~ + (UIScreen.main.bounds.height - 667~) * 0.5)
             make.leading.trailing.equalToSuperview()
             make.width.equalTo(375~)
         }
@@ -89,7 +89,7 @@ class HYZTIAPPurchasePage: UIView {
         productView.spacing = config.btnSpacing~
         scrollView.addSubview(productView)
         productView.snp.makeConstraints { make in
-            make.top.equalTo(config.btnTop~)
+            make.top.equalTo(config.btnTop~ + (UIScreen.main.bounds.height - 667~) * 0.5)
             make.centerX.equalToSuperview()
             make.width.equalTo(config.btnWidth~)
         }
