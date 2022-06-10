@@ -26,7 +26,7 @@ class HYZTIAPPurchasePage: UIView {
     
     init(isGuide: Bool, pushXieYi: @escaping (Int) -> Void) {
         self.isGuide = isGuide
-        self.model = isGuide ? HYZTIAPViewModel.guideModel : HYZTIAPViewModel.mineModel
+        self.model = (!isGuide && config.purchaseType == .mine) ? HYZTIAPViewModel.mineModel : HYZTIAPViewModel.guideModel
         self.type = config.purchaseViewType
         super.init(frame: .zero)
         
