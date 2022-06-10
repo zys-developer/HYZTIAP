@@ -26,8 +26,8 @@ class HYZTIAPPurchasePage: UIView {
     
     init(isGuide: Bool, pushXieYi: @escaping (Int) -> Void) {
         self.isGuide = isGuide
-        self.model = (!isGuide && config.purchaseType == .mine) ? HYZTIAPViewModel.mineModel : HYZTIAPViewModel.guideModel
-        self.type = config.purchaseViewType
+        self.model = (!isGuide && HYZTIAPConfig.shared.delegate!.purchaseType == .mine) ? HYZTIAPViewModel.mineModel : HYZTIAPViewModel.guideModel
+        self.type = HYZTIAPConfig.shared.delegate!.purchaseViewType
         super.init(frame: .zero)
         
         backgroundColor = .clear
