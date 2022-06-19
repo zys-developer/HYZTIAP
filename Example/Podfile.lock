@@ -2,7 +2,7 @@ PODS:
   - ActiveLabel (1.1.0)
   - Alamofire (5.6.1)
   - HandyJSON (5.0.2)
-  - HYZTIAP (0.1.13):
+  - HYZTIAP (0.1.14):
     - ActiveLabel
     - MoyaHandyJSON/RxSwift
     - RxCocoa
@@ -63,7 +63,7 @@ SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
-  HYZTIAP: f11a1615af28ab7b3478da4401e0a953fa8515ab
+  HYZTIAP: b10015ce8ac7df2ebacd463141a7f8abd99dc0ac
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   MoyaHandyJSON: 5d042452ec3b1d3820b90ddb67911beb8bcef6e3

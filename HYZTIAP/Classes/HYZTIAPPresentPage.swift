@@ -19,6 +19,7 @@ public class HYZTIAPPresentPage: UIView {
     public let bigLabel: UILabel
     public let smallLabel: UILabel
     public let confirmBtn: UIButton
+    var shouldShake = true
     
     init(pushXieYi: @escaping (Int) -> Void) {
         let config = HYZTIAPConfig.shared.delegate!
@@ -122,6 +123,7 @@ public class HYZTIAPPresentPage: UIView {
                     if i < 2 {
                         pushXieYi(i)
                     } else {
+                        shouldShake = false
                         HUD.showLoading("恢复中...") { hud in
                             hud.backgroundView.style = .blur
                             hud.backgroundView.blurEffectStyle = .regular
@@ -148,6 +150,7 @@ public class HYZTIAPPresentPage: UIView {
         }
         // shake
         Observable<Int>.interval(.seconds(3), scheduler: MainScheduler.asyncInstance)
+            .filter { [unowned self] _ in shouldShake }
             .subscribe(onNext: { [weak self] _ in
                 btn.shake()
             })
@@ -162,6 +165,7 @@ public class HYZTIAPPresentPage: UIView {
         // MARK: 点击按钮, 开始订阅
         btn.rx.tap
             .subscribe(onNext: { [unowned self] in
+                shouldShake = false
                 HUD.showLoading("加载中...") { hud in
                     hud.backgroundView.style = .blur
                     hud.backgroundView.blurEffectStyle = .regular
@@ -172,6 +176,12 @@ public class HYZTIAPPresentPage: UIView {
                 HYZTIAPViewModel.productRequest.onNext(config.p_defaultId ?? "")
             })
             .disposed(by: self.disposeBag)
+        
+        Observable.merge(HYZTIAPViewModel.success, HYZTIAPViewModel.failure)
+            .subscribe(onNext: { [unowned self] _ in
+                shouldShake = true
+            })
+            .disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {
