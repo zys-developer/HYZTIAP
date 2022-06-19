@@ -6,15 +6,16 @@ import YSHUD
 import SwiftyFitsize
 import SnapKit
 
-class HYZTIAPPurchasePage: UIView {
+public class HYZTIAPPurchasePage: UIView {
     
     enum PurchaseType {
     case guide, mine, present
     }
     
-    let config = HYZTIAPConfig.shared.delegate!
-    
     let disposeBag = DisposeBag()
+    public let scrollView = UIScrollView()
+    public let bigLabel: UILabel
+    public let smallLabel: UILabel
     // 类型
     let purchaseViewType: HYZTIAPConfig.PurchaseViewType
     // banner滚动
@@ -22,23 +23,25 @@ class HYZTIAPPurchasePage: UIView {
     // 数据模型
     let model: BehaviorRelay<HYZTIAPModel?>
     // 购买按钮
-    let productView = UIStackView()
+    public let productView = UIStackView()
     // 关闭按钮
     let closeBtn = UIButton("\(HYZTIAPConfig.shared.delegate?.imagePrefix ?? "g_")close")
     
     init(purchaseType: HYZTIAPPurchasePage.PurchaseType, pushXieYi: @escaping (Int) -> Void) {
+        let config = HYZTIAPConfig.shared.delegate!
         switch purchaseType {
         case .guide, .present where HYZTIAPConfig.shared.delegate?.purchaseType == .guide:
             self.model = HYZTIAPViewModel.guideModel
         default:
             self.model = HYZTIAPViewModel.mineModel
         }
+        bigLabel = UILabel(text: config.text, font: config.bigTextFont~, textColor: config.bigTextColor, textAlignment: .center, backgroundColor: nil)
+        smallLabel = UILabel(text: nil, font: config.smallTextFont~, textColor: config.smallTextColor, textAlignment: .center, backgroundColor: nil)
         self.purchaseViewType = HYZTIAPConfig.shared.delegate!.purchaseViewType
         super.init(frame: .zero)
         
         backgroundColor = .clear
         
-        let scrollView = UIScrollView()
         // 禁用自动调整布局
         scrollView.automaticallyAdjustsScrollIndicatorInsets = false
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -58,7 +61,7 @@ class HYZTIAPPurchasePage: UIView {
         imageView.frame = config.imageFrames[3]~
         
         // 大文字
-        let bigLabel = UILabel(text: config.text, font: config.bigTextFont~, textColor: config.bigTextColor, textAlignment: .center, backgroundColor: nil)
+        bigLabel.numberOfLines = 0
         scrollView.addSubview(bigLabel)
         bigLabel.snp.makeConstraints { make in
             make.top.equalTo(config.textTop~ + (UIScreen.main.bounds.height - 667~) * 0.5)
@@ -67,10 +70,10 @@ class HYZTIAPPurchasePage: UIView {
         }
         
         // 小文字
-        let smallLabel = UILabel(text: nil, font: config.smallTextFont~, textColor: config.smallTextColor, textAlignment: .center, backgroundColor: nil)
+        smallLabel.numberOfLines = 0
         scrollView.addSubview(smallLabel)
         smallLabel.snp.makeConstraints { make in
-            make.top.equalTo(bigLabel.snp.bottom).offset(config.textSpacing)
+            make.top.equalTo(bigLabel.snp.bottom).offset(config.textSpacing~)
             make.centerX.equalToSuperview()
         }
         model
@@ -121,16 +124,16 @@ class HYZTIAPPurchasePage: UIView {
                     return
                 }
                 for product in model.productList ?? [] {
-                    let btn = UIButton(title: product.text, textColor: self.config.btnTextColor, font: self.config.btnFont~, backgroundColor: self.config.btnBackgroundColor)
-                    if let btnImageName = self.config.btnImageName {
+                    let btn = UIButton(title: product.text, textColor: config.btnTextColor, font: config.btnFont~, backgroundColor: config.btnBackgroundColor)
+                    if let btnImageName = config.btnImageName {
                         btn.setBackgroundImage(UIImage(named: btnImageName), for: .normal)
                     }
-                    btn.layer.cornerRadius = self.config.btnCornerRadius~
+                    btn.layer.cornerRadius = config.btnCornerRadius~
                     btn.layer.masksToBounds = true
                     self.productView.addArrangedSubview(btn)
                     btn.snp.makeConstraints { make in
-                        make.width.equalTo(self.config.btnWidth~)
-                        make.height.equalTo(self.config.btnHeight~)
+                        make.width.equalTo(config.btnWidth~)
+                        make.height.equalTo(config.btnHeight~)
                     }
                     // MARK: 点击按钮, 开始订阅
                     btn.rx.tap
@@ -187,8 +190,6 @@ class HYZTIAPPurchasePage: UIView {
                 })
                 .disposed(by: disposeBag)
         }
-        
-        config.customPurchase?(scrollView)
         
         guard purchaseViewType == .banner,
               let top = config.bannerTop,

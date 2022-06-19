@@ -59,20 +59,48 @@ class HYZTIAPGuideViewController: UIViewController {
         // 不回弹
         scrollView.bounces = false
         // 容器大小
-        scrollView.contentSize = CGSize(width: view.bounds.width * (purchaseType == .guide ? 4 : 1), height: view.bounds.height)
+        let contentWidth: CGFloat
+        if purchaseType == .guide, config.purchaseViewType != .present {
+            contentWidth = view.bounds.width * 4
+        } else if config.purchaseViewType == .present {
+            contentWidth = view.bounds.width * 3
+        } else {
+            contentWidth = view.bounds.width
+        }
+        scrollView.contentSize = CGSize(width: contentWidth, height: view.bounds.height)
         view.addSubview(scrollView)
         
         // 内购页
-        let iapPage = HYZTIAPPurchasePage(purchaseType: purchaseType) { [weak self] index in
-            self?.pushXieYi(index: index)
+        let ip: HYZTIAPPurchasePage?
+        if config.purchaseViewType == .present {
+            ip = nil
+            if purchaseType != .guide {
+                let pPage = HYZTIAPPresentPage { [unowned self] index in
+                    pushXieYi(index: index)
+                }
+                scrollView.addSubview(pPage)
+                pPage.frame = view.bounds
+                config.customPresent?(pPage)
+                pPage.closeBtn.rx.tap
+                    .subscribe(onNext: { [unowned self] in
+                        finished()
+                    })
+                    .disposed(by: pPage.disposeBag)
+            }
+        } else {
+            let iapPage = HYZTIAPPurchasePage(purchaseType: purchaseType) { [unowned self] index in
+                pushXieYi(index: index)
+            }
+            ip = iapPage
+            scrollView.addSubview(iapPage)
+            iapPage.frame = CGRect(x: view.bounds.width * (purchaseType == .guide ? 3 : 0), y: 0, width: view.bounds.width, height: view.bounds.height)
+            config.customPurchase?(iapPage)
+            iapPage.closeBtn.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    self?.finished()
+                })
+                .disposed(by: disposeBag)
         }
-        scrollView.addSubview(iapPage)
-        iapPage.frame = CGRect(x: view.bounds.width * (purchaseType == .guide ? 3 : 0), y: 0, width: view.bounds.width, height: view.bounds.height)
-        iapPage.closeBtn.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.finished()
-            })
-            .disposed(by: disposeBag)
         
         // 引导页
         if purchaseType == .guide {
@@ -80,13 +108,16 @@ class HYZTIAPGuideViewController: UIViewController {
                 let page = HYZTIAPGuidePage(imageName: "\(config.imagePrefix)\(i)", imageFrame: config.imageFrames[i], bigText: texts.bigText, smallText: texts.smallText)
                 scrollView.addSubview(page)
                 page.frame = CGRect(x: view.bounds.width * CGFloat(i), y: 0, width: view.bounds.width, height: view.bounds.height)
+                config.customGuides?(page, i)
             }
             
             // 隐藏购买按钮
-            scrollView.rx.contentOffset
-                .map({ ($0.x + 0.01) / 375~ < 3 })
-                .bind(to: iapPage.productView.rx.isHidden)
-                .disposed(by: disposeBag)
+            if let ip = ip {
+                scrollView.rx.contentOffset
+                    .map({ ($0.x + 0.01) / 375~ < 3 })
+                    .bind(to: ip.productView.rx.isHidden)
+                    .disposed(by: disposeBag)
+            }
         }
     }
     
@@ -105,7 +136,24 @@ class HYZTIAPGuideViewController: UIViewController {
                 // 滚动到下一页
                 let currentIndex = Int((self.scrollView.contentOffset.x + 0.01) / 375~)
                 guard currentIndex < 3 else { return }
-                scrollView.setContentOffset(CGPoint(x: ((currentIndex + 1) * 375)~, y: 0), animated: true)
+                if config.purchaseViewType == .present, currentIndex == 2 {
+                    let pPage = HYZTIAPPresentPage { [weak self] index in
+                        self?.pushXieYi(index: index)
+                    }
+                    view.addSubview(pPage)
+                    config.customPresent?(pPage)
+                    pPage.frame = CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: view.bounds.height)
+                    UIView.animate(withDuration: 0.25) {
+                        pPage.frame = view.bounds
+                    }
+                    pPage.closeBtn.rx.tap
+                        .subscribe(onNext: {
+                            finished()
+                        })
+                        .disposed(by: pPage.disposeBag)
+                } else {
+                    scrollView.setContentOffset(CGPoint(x: ((currentIndex + 1) * 375)~, y: 0), animated: true)
+                }
             })
             .disposed(by: disposeBag)
         

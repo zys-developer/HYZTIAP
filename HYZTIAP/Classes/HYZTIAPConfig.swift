@@ -5,7 +5,7 @@ import UIKit
 public struct HYZTIAPConfig {
     
     public enum PurchaseViewType {
-    case `default`, banner
+    case `default`, banner, present
     }
     public enum PurchaseType {
     case guide, mine
@@ -64,7 +64,7 @@ public protocol HYZTIAPConfigDelegate {
     /// 文字
     var texts: [(bigText: String, smallText: String)] { get }
     /// 自定义引导页
-    var customGuides: [(UIView) -> Void]? { get }
+    var customGuides: ((HYZTIAPGuidePage, Int) -> Void)? { get }
     
     // MARK: 内购页的配置
     /// 触点内购接口类型
@@ -94,7 +94,7 @@ public protocol HYZTIAPConfigDelegate {
     /// 底部按钮间距
     var bottomBtnSpacing: CGFloat { get }
     /// 自定义内购页
-    var customPurchase: ((UIScrollView) -> Void)? { get }
+    var customPurchase: ((HYZTIAPPurchasePage) -> Void)? { get }
     /// 内购页类型
     var purchaseViewType: HYZTIAPConfig.PurchaseViewType { get }
     /// banner top
@@ -156,6 +156,44 @@ public protocol HYZTIAPConfigDelegate {
     /// 进入首页按钮背景色
     var noNetworkBtnBgColor: UIColor { get }
     
+    // MARK: 弹出页的配置
+    /// 关闭按钮文字颜色
+    var p_closeBtnColor: UIColor? { get }
+    /// 关闭按钮文字字体
+    var p_closeBtnFont: UIFont? { get }
+    /// 大文字top
+    var p_bigTextTop: CGFloat? { get }
+    /// 大文字颜色
+    var p_bigTextColor: UIColor? { get }
+    /// 大文字字体
+    var p_bigTextFont: UIFont? { get }
+    /// 小文字
+    var p_smallText: [String]? { get }
+    /// 小文字颜色
+    var p_smallTextColor: [UIColor]? { get }
+    /// 小文字字体
+    var p_smallTextFont: [UIFont]? { get }
+    /// 按钮top
+    var p_btnTop: CGFloat? { get }
+    /// 按钮width
+    var p_btnWidth: CGFloat? { get }
+    /// 按钮height
+    var p_btnHeight: CGFloat? { get }
+    /// 按钮默认文字
+    var p_btnText: String? { get }
+    /// 按钮文字颜色
+    var p_btnTextColor: UIColor? { get }
+    /// 按钮文字字体
+    var p_btnTextFont: UIFont? { get }
+    /// 按钮背景色
+    var p_btnBackgroundColor: UIColor? { get }
+    /// 按钮圆角
+    var p_btnCornerRadius: CGFloat? { get }
+    /// 默认商品id
+    var p_defaultId: String? { get }
+    /// 自定义弹出页
+    var customPresent: ((HYZTIAPPresentPage) -> Void)? { get }
+    
     // MARK: 接口的配置
     /// 接口地址
     var host: String { get }
@@ -202,7 +240,7 @@ public extension HYZTIAPConfigDelegate {
     
     // MARK: 引导页的配置
     /// 自定义引导页
-    var customGuides: [(UIView) -> Void]? { nil }
+    var customGuides: ((HYZTIAPGuidePage, Int) -> Void)? { nil }
     
     // MARK: 内购页的配置
     /// 触点内购接口类型
@@ -210,7 +248,7 @@ public extension HYZTIAPConfigDelegate {
     /// 按钮间距
     var btnSpacing: CGFloat { 12 }
     /// 自定义内购页
-    var customPurchase: ((UIScrollView) -> Void)? { nil }
+    var customPurchase: ((HYZTIAPPurchasePage) -> Void)? { nil }
     /// 内购页类型
     var purchaseViewType: HYZTIAPConfig.PurchaseViewType { .default }
     /// banner top
@@ -269,6 +307,44 @@ public extension HYZTIAPConfigDelegate {
     var noNetworkBtnTitleFont: UIFont { .systemFont(ofSize: 16) }
     /// 进入首页按钮背景色
     var noNetworkBtnBgColor: UIColor { #colorLiteral(red: 0.9254901961, green: 0.9254901961, blue: 0.9254901961, alpha: 1) }
+    
+    // MARK: 弹出页的配置
+    /// 关闭按钮文字颜色
+    var p_closeBtnColor: UIColor? { nil }
+    /// 关闭按钮文字字体
+    var p_closeBtnFont: UIFont? { nil }
+    /// 大文字top
+    var p_bigTextTop: CGFloat? { nil }
+    /// 大文字颜色
+    var p_bigTextColor: UIColor? { nil }
+    /// 大文字字体
+    var p_bigTextFont: UIFont? { nil }
+    /// 小文字
+    var p_smallText: [String]? { nil }
+    /// 小文字颜色
+    var p_smallTextColor: [UIColor]? { nil }
+    /// 小文字字体
+    var p_smallTextFont: [UIFont]? { nil }
+    /// 按钮top
+    var p_btnTop: CGFloat? { nil }
+    /// 按钮width
+    var p_btnWidth: CGFloat? { nil }
+    /// 按钮height
+    var p_btnHeight: CGFloat? { nil }
+    /// 按钮默认文字
+    var p_btnText: String? { nil }
+    /// 按钮文字颜色
+    var p_btnTextColor: UIColor? { nil }
+    /// 按钮文字字体
+    var p_btnTextFont: UIFont? { nil }
+    /// 按钮背景色
+    var p_btnBackgroundColor: UIColor? { nil }
+    /// 按钮圆角
+    var p_btnCornerRadius: CGFloat? { nil }
+    /// 默认商品id
+    var p_defaultId: String? { nil }
+    /// 自定义弹出页
+    var customPresent: ((HYZTIAPPresentPage) -> Void)? { nil }
     
     // MARK: 接口的配置
     /// 按钮上边的文字
