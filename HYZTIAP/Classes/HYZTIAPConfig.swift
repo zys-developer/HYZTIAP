@@ -193,6 +193,8 @@ public protocol HYZTIAPConfigDelegate {
     var p_btnCornerRadius: CGFloat? { get }
     /// 默认商品id
     var p_defaultId: String? { get }
+    /// 底部bottom
+    var p_bottom: CGFloat? { get }
     /// 自定义弹出页
     var customPresent: ((HYZTIAPPresentPage) -> Void)? { get }
     
@@ -345,6 +347,8 @@ public extension HYZTIAPConfigDelegate {
     var p_btnBackgroundColor: UIColor? { nil }
     /// 按钮圆角
     var p_btnCornerRadius: CGFloat? { nil }
+    /// 底部bottom
+    var p_bottom: CGFloat? { nil }
     /// 默认商品id
     var p_defaultId: String? { nil }
     /// 自定义弹出页

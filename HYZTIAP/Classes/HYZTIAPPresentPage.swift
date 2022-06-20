@@ -41,7 +41,6 @@ public class HYZTIAPPresentPage: UIView {
         addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-(config.p_btnTop! > config.bottomBtnTop ? config.p_btnTop! + config.p_btnHeight! + 20 : config.bottomBtnTop + 40)~)
         }
         
         // 图片
@@ -114,6 +113,9 @@ public class HYZTIAPPresentPage: UIView {
         bottomBtnStackView.snp.makeConstraints { make in
             make.top.equalTo(scrollView.snp.bottom).offset(config.bottomBtnTop~)
             make.centerX.equalToSuperview()
+            if config.bottomBtnTop > config.p_btnTop ?? 0 {
+                make.bottom.equalTo(-(config.p_bottom ?? 0))
+            }
         }
         let btnTexts = ["隐私协议", "使用条款", "恢复购买"]
         for i in 0..<3 {
@@ -148,6 +150,9 @@ public class HYZTIAPPresentPage: UIView {
             make.width.equalTo(config.p_btnWidth!~)
             make.height.equalTo(config.p_btnHeight!~)
             make.top.equalTo(scrollView.snp.bottom).offset(config.p_btnTop ?? 20)
+            if config.bottomBtnTop <= config.p_btnTop ?? 0 {
+                make.bottom.equalTo(-(config.p_bottom ?? 0))
+            }
         }
         // shake
         Observable<Int>.interval(.seconds(3), scheduler: MainScheduler.asyncInstance)
