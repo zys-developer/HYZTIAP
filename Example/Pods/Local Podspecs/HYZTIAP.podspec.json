@@ -1,6 +1,6 @@
 {
   "name": "HYZTIAP",
-  "version": "0.1.14",
+  "version": "0.2.0",
   "summary": "鸿运众腾内购",
   "description": "鸿运众腾内购封装",
   "homepage": "https://github.com/zys-developer/HYZTIAP",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/zys-developer/HYZTIAP.git",
-    "tag": "0.1.14"
+    "tag": "0.2.0"
   },
   "platforms": {
     "ios": "13.0"

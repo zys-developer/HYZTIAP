@@ -173,6 +173,8 @@ public protocol HYZTIAPConfigDelegate {
     var p_smallTextColor: [UIColor]? { get }
     /// 小文字字体
     var p_smallTextFont: [UIFont]? { get }
+    /// 小文字width
+    var p_smallTextWidth: CGFloat? { get }
     /// 按钮top
     var p_btnTop: CGFloat? { get }
     /// 按钮width
@@ -325,6 +327,8 @@ public extension HYZTIAPConfigDelegate {
     var p_smallTextColor: [UIColor]? { nil }
     /// 小文字字体
     var p_smallTextFont: [UIFont]? { nil }
+    /// 小文字width
+    var p_smallTextWidth: CGFloat? { nil }
     /// 按钮top
     var p_btnTop: CGFloat? { nil }
     /// 按钮width

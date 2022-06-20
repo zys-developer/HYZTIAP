@@ -78,6 +78,7 @@ public class HYZTIAPPresentPage: UIView {
         smallLabel.snp.makeConstraints { make in
             make.top.equalTo(bigLabel.snp.bottom).offset(config.textSpacing~)
             make.centerX.equalToSuperview()
+            make.width.equalTo(config.p_smallTextWidth!)
         }
         let texts = config.p_smallText!
         let attStr = NSMutableAttributedString(string: (texts).joined(separator: ""))
