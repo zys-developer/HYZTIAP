@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HYZTIAP'
-  s.version          = '0.2.2'
+  s.version          = '0.2.3'
   s.summary          = '鸿运众腾内购'
 
 # This description is used to generate tags and improve search results.

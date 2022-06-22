@@ -93,24 +93,12 @@ public class HYZTIAPLaunchViewController: UIViewController {
         HYZTIAPViewModel.reachability
             .bind(to: stackView.rx.isHidden)
             .disposed(by: disposeBag)
-        if UserDefaults.standard.bool(forKey: HYZTIAPLaunchViewController.didLaunchGuideKey) {
-            // 已经加载过引导页, 有网直接进入首页
-            HYZTIAPViewModel.reachability
-                // 跳过默认值
-                .skip(1)
-                .subscribe(onNext: { [weak self] reachability in
-                    if reachability { self?.finishLaunching() }
-                })
-                .disposed(by: disposeBag)
-        } else {
-            // 没有加载过引导页
-            HYZTIAPViewModel.guideModel
-                .skip(1)
-                .subscribe(onNext: { [weak self] _ in
-                    self?.finishLaunching()
-                })
-                .disposed(by: disposeBag)
-        }
+        HYZTIAPViewModel.guideModel
+            .skip(1)
+            .subscribe(onNext: { [weak self] _ in
+                self?.finishLaunching()
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc public static func launch(on window: UIWindow?, rootViewController: UIViewController, configDelegate: Any, showXieyi: @escaping (UIViewController) -> Bool) {

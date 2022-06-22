@@ -62,7 +62,7 @@ class HYZTIAPGuideViewController: UIViewController {
         let contentWidth: CGFloat
         if purchaseType == .guide, config.purchaseViewType != .present {
             contentWidth = view.bounds.width * 4
-        } else if config.purchaseViewType == .present {
+        } else if purchaseType == .guide, config.purchaseViewType == .present {
             contentWidth = view.bounds.width * 3
         } else {
             contentWidth = view.bounds.width
