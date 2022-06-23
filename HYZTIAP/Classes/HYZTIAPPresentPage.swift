@@ -13,13 +13,13 @@ import YSHUD
 
 public class HYZTIAPPresentPage: UIView {
     
-    let disposeBag = DisposeBag()
-    let closeBtn: UIButton
+    public let disposeBag = DisposeBag()
+    public let closeBtn: UIButton
     public let scrollView = UIScrollView()
     public let bigLabel: UILabel
     public let smallLabel: UILabel
     public let confirmBtn: UIButton
-    var shouldShake = true
+    private var shouldShake = true
     
     init(pushXieYi: @escaping (Int) -> Void) {
         let config = HYZTIAPConfig.shared.delegate!

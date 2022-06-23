@@ -88,27 +88,30 @@ struct HYZTIAPReceiptInfo: HandyJSON {
     var subscription_group_identifier: Double?
 }
 
-struct HYZTIAPXieYiModel: HandyJSON {
-    var content: String?
+public struct HYZTIAPXieYiModel: HandyJSON {
+    public var content: String?
+    public init() {}
 }
 
-struct HYZTIAPModel: HandyJSON {
+public struct HYZTIAPModel: HandyJSON {
     // 按钮上边的文字
-    var message: String?
+    public var message: String?
     // 商品列表
-    var productList: [HYZTIAPProductModel]?
+    public var productList: [HYZTIAPProductModel]?
+    public init() {}
 }
 
-struct HYZTIAPProductModel: HandyJSON {
+public struct HYZTIAPProductModel: HandyJSON {
     // 商品id
-    var productId: String?
+    public var productId: String?
     // 按钮文字
-    var text: String?
+    public var text: String?
+    public init() {}
 }
 
 extension HYZTIAPModel {
     // 自定义序列化规则
-    mutating func mapping(mapper: HelpingMapper) {
+    mutating public func mapping(mapper: HelpingMapper) {
         if let message = HYZTIAPConfig.shared.delegate?.messageMapper {
             mapper <<<
                 self.message <-- message
@@ -122,7 +125,7 @@ extension HYZTIAPModel {
 
 extension HYZTIAPProductModel {
     // 自定义序列化规则
-    mutating func mapping(mapper: HelpingMapper) {
+    mutating public func mapping(mapper: HelpingMapper) {
         if let productId = HYZTIAPConfig.shared.delegate?.productIdMapper {
             mapper <<<
                 self.productId <-- productId

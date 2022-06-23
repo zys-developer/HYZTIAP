@@ -12,20 +12,20 @@ public class HYZTIAPPurchasePage: UIView {
     case guide, mine, present
     }
     
-    let disposeBag = DisposeBag()
+    public let disposeBag = DisposeBag()
     public let scrollView = UIScrollView()
     public let bigLabel: UILabel
     public let smallLabel: UILabel
     // 类型
-    let purchaseViewType: HYZTIAPConfig.PurchaseViewType
+    public let purchaseViewType: HYZTIAPConfig.PurchaseViewType
     // banner滚动
-    var bannerScroll = true
+    private var bannerScroll = true
     // 数据模型
-    let model: BehaviorRelay<HYZTIAPModel?>
+    private let model: BehaviorRelay<HYZTIAPModel?>
     // 购买按钮
     public let productView = UIStackView()
     // 关闭按钮
-    let closeBtn = UIButton("\(HYZTIAPConfig.shared.delegate?.imagePrefix ?? "g_")close")
+    public let closeBtn = UIButton("\(HYZTIAPConfig.shared.delegate?.imagePrefix ?? "g_")close")
     
     init(purchaseType: HYZTIAPPurchasePage.PurchaseType, pushXieYi: @escaping (Int) -> Void) {
         let config = HYZTIAPConfig.shared.delegate!

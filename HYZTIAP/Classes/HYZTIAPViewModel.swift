@@ -27,7 +27,7 @@ public class HYZTIAPViewModel: NSObject {
         SKPaymentQueue.default().add(shared)
     }
     
-    private let disposeBag = DisposeBag()
+    public let disposeBag = DisposeBag()
     
     /// 请求商品
     static let productRequest = PublishSubject<String>()
@@ -36,17 +36,17 @@ public class HYZTIAPViewModel: NSObject {
     /// 完成订单
     private let completeTransaction = PublishSubject<SKPaymentTransaction>()
     /// 成功
-    static let success = PublishSubject<String?>()
+    public static let success = PublishSubject<String?>()
     /// 失败
-    static let failure = PublishSubject<String?>()
+    public static let failure = PublishSubject<String?>()
     
     // 网络监听
     private let nrm = NetworkReachabilityManager()
-    static let reachability = BehaviorRelay(value: true)
+    public static let reachability = BehaviorRelay(value: true)
     /// 引导页模型
-    static let guideModel = BehaviorRelay<HYZTIAPModel?>(value: nil)
+    public static let guideModel = BehaviorRelay<HYZTIAPModel?>(value: nil)
     /// 内购页模型
-    static let mineModel = BehaviorRelay<HYZTIAPModel?>(value: nil)
+    public static let mineModel = BehaviorRelay<HYZTIAPModel?>(value: nil)
     
     private static let shared = HYZTIAPViewModel()
     private override init() {
