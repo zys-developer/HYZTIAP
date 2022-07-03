@@ -69,6 +69,12 @@ public protocol HYZTIAPConfigDelegate {
     // MARK: 内购页的配置
     /// 触点内购接口类型
     var purchaseType: HYZTIAPConfig.PurchaseType { get }
+    /// 关闭按钮文字
+    var closeBtnText: String? { get }
+    /// 关闭按钮文字字体
+    var closeBtnTextFont: UIFont? { get }
+    /// 关闭按钮文字颜色
+    var closeBtnTextColor: UIColor? { get }
     /// 关闭按钮top
     var closeBtnTop: CGFloat { get }
     /// 关闭按钮leading

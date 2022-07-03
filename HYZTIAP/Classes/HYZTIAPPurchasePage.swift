@@ -21,11 +21,13 @@ public class HYZTIAPPurchasePage: UIView {
     // banner滚动
     private var bannerScroll = true
     // 数据模型
-    private let model: BehaviorRelay<HYZTIAPModel?>
+    public let model: BehaviorRelay<HYZTIAPModel?>
     // 购买按钮
     public let productView = UIStackView()
     // 关闭按钮
-    public let closeBtn = UIButton("\(HYZTIAPConfig.shared.delegate?.imagePrefix ?? "g_")close")
+    public let closeBtn: UIButton
+    // 图片
+    public let imageView: UIImageView
     
     init(purchaseType: HYZTIAPPurchasePage.PurchaseType, pushXieYi: @escaping (Int) -> Void) {
         let config = HYZTIAPConfig.shared.delegate!
@@ -38,6 +40,14 @@ public class HYZTIAPPurchasePage: UIView {
         bigLabel = UILabel(text: config.text, font: config.bigTextFont~, textColor: config.bigTextColor, textAlignment: .center, backgroundColor: nil)
         smallLabel = UILabel(text: nil, font: config.smallTextFont~, textColor: config.smallTextColor, textAlignment: .center, backgroundColor: nil)
         self.purchaseViewType = HYZTIAPConfig.shared.delegate!.purchaseViewType
+        if let text = HYZTIAPConfig.shared.delegate?.closeBtnText,
+           let font = HYZTIAPConfig.shared.delegate?.closeBtnTextFont,
+           let color = HYZTIAPConfig.shared.delegate?.closeBtnTextColor {
+            closeBtn = UIButton(title: text, textColor: color, font: font)
+        } else {
+            closeBtn = UIButton("\(HYZTIAPConfig.shared.delegate?.imagePrefix ?? "g_")close")
+        }
+        imageView = UIImageView("\(config.imagePrefix)3")
         super.init(frame: .zero)
         
         backgroundColor = .clear
@@ -56,17 +66,16 @@ public class HYZTIAPPurchasePage: UIView {
         }
         
         // 图片
-        let imageView = UIImageView("\(config.imagePrefix)3")
         scrollView.addSubview(imageView)
         imageView.frame = config.imageFrames[3]~
+        imageView.layer.masksToBounds = true
         
         // 大文字
         bigLabel.numberOfLines = 0
         scrollView.addSubview(bigLabel)
         bigLabel.snp.makeConstraints { make in
-            make.top.equalTo(config.textTop~ + (UIScreen.main.bounds.height - 667~) * 0.5)
+            make.top.equalTo(config.textTop~)
             make.leading.trailing.equalToSuperview()
-            make.width.equalTo(375~)
         }
         
         // 小文字
@@ -74,7 +83,7 @@ public class HYZTIAPPurchasePage: UIView {
         scrollView.addSubview(smallLabel)
         smallLabel.snp.makeConstraints { make in
             make.top.equalTo(bigLabel.snp.bottom).offset(config.textSpacing~)
-            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
         }
         model
             .map({ $0?.message })
@@ -98,7 +107,7 @@ public class HYZTIAPPurchasePage: UIView {
         productView.spacing = config.btnSpacing~
         scrollView.addSubview(productView)
         productView.snp.makeConstraints { make in
-            make.top.equalTo(config.btnTop~ + (UIScreen.main.bounds.height - 667~) * 0.5)
+            make.top.equalTo(config.btnTop~)
             make.centerX.equalToSuperview()
             make.width.equalTo(config.btnWidth~)
         }
